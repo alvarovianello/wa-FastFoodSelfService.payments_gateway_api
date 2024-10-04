@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: wa-paymentsgatewayapi-configmap
 data:
-  ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_ENVIRONMENT: "Development"
   ConnectionStrings__DefaultConnection: "Server=fastfood-db.czbnxjpgfykv.us-east-1.rds.amazonaws.com;Port=5432;Database=FastFoodDB;User Id=postgres;Password=FastFoodDB#321;"
   ExternalServices__OrderApiUrl: "http://wa-ordertoolsapi-service:5004"
   ExternalServices__MercadoPago__ApiUrl: "https://api.mercadopago.com"
