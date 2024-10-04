@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wa-paymentsgatewayapi
+  labels:
+    app: wa-paymentsgatewayapi
+spec:
+  containers:
+    - name: wa-paymentsgatewayapi-container
+      image: 659767469388.dkr.ecr.us-east-1.amazonaws.com/wa-fastfood/wa-fastfoodselfservice.payments_gateway_api:latest
+      ports:
+        - containerPort: 5003
+      envFrom:
+        - configMapRef:
+            name: wa-paymentsgatewayapi-configmap

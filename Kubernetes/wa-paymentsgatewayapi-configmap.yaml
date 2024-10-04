@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wa-paymentsgatewayapi-configmap
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ConnectionStrings__DefaultConnection: "Server=fastfood-db.czbnxjpgfykv.us-east-1.rds.amazonaws.com;Port=5432;Database=FastFoodDB;User Id=postgres;Password=FastFoodDB#321;"
+  ExternalServices__OrderApiUrl: "http://wa-ordertoolsapi-service:5004"
+  ExternalServices__MercadoPago__ApiUrl: "https://api.mercadopago.com"
+  ExternalServices__MercadoPago__NotificationUrl: "https://b46d-143-208-127-165.ngrok-free.app/api/payment/webhook?source_news=webhooks"
+  ExternalServices__MercadoPago__UserId: "2007486615"
+  ExternalServices__MercadoPago__ExternalPosId: "FFWA001POS001"
+  ExternalServices__MercadoPago__Token: "APP_USR-8118966126069584-092623-8ff055cdd21d5e74e85197462756acb3-2007486615"
+  ExternalServices__MercadoPago__SecretSignature: "4b447bbd7091c562d11935ac80cc1c7f6dfb2d791886fa71555a90481fdcfa80"

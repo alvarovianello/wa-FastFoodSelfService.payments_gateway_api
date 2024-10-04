@@ -1,0 +1,20 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/wa-FastFoodSelfService.payments_gateway_api
+/.vs/ProjectEvaluation
+/Api/bin/Debug/net8.0
+/Api/obj
+/Application/bin/Debug/net8.0
+/Application/obj
+/CrossCutting/bin/Debug/net8.0
+/CrossCutting/obj
+/Domain/bin/Debug/net8.0
+/Domain/obj
+/Infrastructure/bin/Debug/net8.0
+/Infrastructure/obj
+/UnitTests/bin/Debug/net8.0
+/UnitTests/obj
+/IntegrationTests/bin/Debug/net8.0
+/IntegrationTests/obj

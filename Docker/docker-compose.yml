@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  wa-ordertoolsapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=Lanchonete;User Id=postgres;Password=admin;;
+      - ExternalServices__OrderApiUrl=http://localhost:5004
+      - ExternalServices__MercadoPago__ApiUrl=https://api.mercadopago.com
+    networks:
+      - wa-paymentsgatewayapi-network
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: Lanchonete
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - wa-paymentsgatewayapi-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - wa-paymentsgatewayapi-network
+
+networks:
+  wa-paymentsgatewayapi-network:
+    driver: bridge
+
+volumes:
+  db_data:
