@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: wa-paymentsgatewayapi-container
-          image: willmarques/wa-fastfoodselfservice.payments_gateway_api:latest
+          image: 659767469388.dkr.ecr.us-east-1.amazonaws.com/wa-fastfood/wa-fastfoodselfservice.payments_gateway_api:latest
           ports:
             - containerPort: 5003
           envFrom:

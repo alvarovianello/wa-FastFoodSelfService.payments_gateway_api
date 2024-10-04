@@ -26,17 +26,6 @@ namespace Api.Extensions
 
             services.AddScoped<HmacVerifierHelper>();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyMethod()
-                               .AllowAnyHeader();
-                    });
-            });
-
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddHttpClient();
 

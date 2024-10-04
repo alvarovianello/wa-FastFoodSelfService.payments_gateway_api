@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: wa-paymentsgatewayapi-configmap
 data:
-  ASPNETCORE_ENVIRONMENT: "Development"
-  ConnectionStrings__DefaultConnection: "Server=postgres;Port=5432;Database=Lanchonete;User Id=postgres;Password=admin;"
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ConnectionStrings__DefaultConnection: "Server=fastfood-db.czbnxjpgfykv.us-east-1.rds.amazonaws.com;Port=5432;Database=FastFoodDB;User Id=postgres;Password=FastFoodDB#321;"
   ExternalServices__OrderApiUrl: "http://wa-ordertoolsapi-service:5004"
   ExternalServices__MercadoPago__ApiUrl: "https://api.mercadopago.com"
   ExternalServices__MercadoPago__NotificationUrl: "https://b46d-143-208-127-165.ngrok-free.app/api/payment/webhook?source_news=webhooks"

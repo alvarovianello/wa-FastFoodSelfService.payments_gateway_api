@@ -1,0 +1,34 @@
+name: Remove Deploy AWS Academy - EKS - Payments Gateway API
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: AWS Configure
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.REGION_DEFAULT }}
+
+      - name: Update Kube Config
+        run: aws eks update-kubeconfig --name ${{ vars.CLUSTER_NAME }} --region ${{ vars.REGION_DEFAULT }}
+
+      - name: Remove Kubernetes configurations
+        run: |
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-configmap.yaml || true
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-deployment.yaml || true
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-hpa.yaml || true
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-pod.yaml || true
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-pvc.yaml || true
+          kubectl delete -f Kubernetes/wa-paymentsgatewayapi-service.yaml || true

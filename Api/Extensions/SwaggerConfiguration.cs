@@ -28,7 +28,6 @@ namespace Api.Extensions
                         Description = applicationDescription,
                     });
                 options.DocumentFilter<HealthChecksFilter>();
-                options.MapType<byte[]>(() => new OpenApiSchema { Type = "string", Format = "binary" });
             });
 
             return services;

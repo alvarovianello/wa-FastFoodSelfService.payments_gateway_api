@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs/wa-FastFoodSelfService.payments_gateway_api
+/.vs/ProjectEvaluation
 /Api/bin/Debug/net8.0
 /Api/obj
 /Application/bin/Debug/net8.0

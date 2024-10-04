@@ -3,11 +3,10 @@ using Application.Interfaces.UseCases;
 using CrossCutting.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SkiaSharp;
-using System.Reflection.PortableExecutable;
+using System.Drawing;
+using System.Drawing.Imaging;
 using ZXing;
-using ZXing.SkiaSharp;
-using ZXing.SkiaSharp.Rendering;
+using ZXing.QrCode;
 
 namespace Api.Controllers
 {
@@ -44,8 +43,9 @@ namespace Api.Controllers
             try
             {
                 var qrCode = await _createPayment.ExecuteAsync(paymentRequest);
-                var qrCodeImage = GenerateQRCodeImage(qrCode);
-                return File(qrCodeImage, "image/png");
+                return Ok(new { qrCode = qrCode });
+                //var qrCodeImage = GenerateQRCodeImage(qrCode);
+                //return File(qrCodeImage, "image/png");
             }
             catch (Exception ex)
             {
@@ -135,25 +135,23 @@ namespace Api.Controllers
 
         private byte[] GenerateQRCodeImage(string text)
         {
-            var writer = new BarcodeWriter
-            {
-                Format = BarcodeFormat.QR_CODE,
-                Options = new ZXing.Common.EncodingOptions
-                {
-                    Height = 300,
-                    Width = 300
-                },
-                Renderer = new SKBitmapRenderer()
-            };
+            var qrCodeWriter = new QRCodeWriter();
+            var qrCodeData = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 300, 300);
 
-            using (var bitmap = writer.Write(text))
+            using (var bitmap = new Bitmap(qrCodeData.Width, qrCodeData.Height))
             {
-                using (var image = SKImage.FromBitmap(bitmap))
+                for (var y = 0; y < qrCodeData.Height; y++)
                 {
-                    using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                    for (var x = 0; x < qrCodeData.Width; x++)
                     {
-                        return data.ToArray();
+                        bitmap.SetPixel(x, y, qrCodeData[x, y] ? Color.Black : Color.White);
                     }
+                }
+
+                using (var ms = new MemoryStream())
+                {
+                    bitmap.Save(ms, ImageFormat.Png);
+                    return ms.ToArray();
                 }
             }
         }
