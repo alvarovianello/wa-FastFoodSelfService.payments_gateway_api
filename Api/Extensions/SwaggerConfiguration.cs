@@ -30,6 +30,8 @@ namespace Api.Extensions
                 options.DocumentFilter<HealthChecksFilter>();
             });
 
+            services.AddHealthChecks();
+
             return services;
         }
     }
