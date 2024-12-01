@@ -18,3 +18,6 @@
 /UnitTests/obj
 /IntegrationTests/bin/Debug/net8.0
 /IntegrationTests/obj
+/UnitTests/CoverageReport
+/UnitTests/TestResults
+/IntegrationTests/TestResults/25db1d93-f449-415c-8faf-328bdae592a1

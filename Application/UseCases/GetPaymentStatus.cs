@@ -24,6 +24,7 @@ namespace Application.UseCases
             {
                 OrderId = payment.OrderId,
                 Status = Enum.GetName(typeof(PaymentStatus), payment.PaymentStatus) ?? PaymentStatus.Pending.ToString(),
+                OrderNumber = payment.OrderNumber,
                 PaymentDateProcessed = payment.PaymentDateProcessed ?? null
             };
         }

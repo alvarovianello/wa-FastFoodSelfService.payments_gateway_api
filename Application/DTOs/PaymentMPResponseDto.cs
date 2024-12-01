@@ -4,8 +4,6 @@ namespace Application.DTOs
 {
     public class PaymentMPResponseDto
     {
-        public long Id { get; set; }
-
         [JsonPropertyName("external_reference")]
         public string? ExternalReference { get; set; }
 

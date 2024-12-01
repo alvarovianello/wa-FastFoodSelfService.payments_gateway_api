@@ -7,6 +7,5 @@ namespace Application.Interfaces.ExternalServices
         Task<QrCodeResponseDto> GenerateQrCodeMPAsync(OrderReponseDto order);
         Task<bool> GenerateOrderMPAsync(OrderReponseDto order);
         Task<PaymentMPResponseDto?> GetPaymentAsync(string paymentId);
-        Task<MerchantOrdersMPResponseDto?> GetMerchantOrderAsync(string merchantOrder);
     }
 }

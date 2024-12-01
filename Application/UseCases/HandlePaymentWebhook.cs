@@ -47,7 +47,11 @@ namespace Application.UseCases
                     return "";
             }
 
-            await _paymentRepository.UpdatePaymentStatusAsync(PaymentData);
+            // Verifica se o PaymentData não é nulo antes de atualizar no repositório
+            if (PaymentData != null)
+            {
+                await _paymentRepository.UpdatePaymentStatusAsync(PaymentData);
+            }
 
             return "";
         }

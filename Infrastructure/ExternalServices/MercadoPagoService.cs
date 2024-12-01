@@ -134,29 +134,5 @@ namespace Infrastructure.ExternalServices
 
             return result;
         }
-
-        public async Task<MerchantOrdersMPResponseDto?> GetMerchantOrderAsync(string merchantOrder)
-        {
-            var apiUrl = _configuration["ExternalServices:MercadoPago:ApiUrl"] + "/merchant_orders/{merchant_order}";
-            var token = _configuration["ExternalServices:MercadoPago:Token"];
-
-            apiUrl = apiUrl?.Replace("{merchant_order}", merchantOrder);
-
-            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var response = await _httpClient.SendAsync(request);
-
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Erro ao Buscar Merchant Orders no Mercado Pago.");
-            }
-
-            var result = await response.Content.ReadFromJsonAsync<MerchantOrdersMPResponseDto>();
-
-            return result;
-        }
     }
 }

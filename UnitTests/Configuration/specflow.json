@@ -1,0 +1,7 @@
+{
+  "specFlow": {
+    "unitTestProvider": {
+      "name": "xUnit"
+    }
+  }
+}
